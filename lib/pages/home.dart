@@ -8,13 +8,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
+
+    Color appBarColor = Colors.transparent;
+
+    _scrollController.addListener(() {
+      if(_scrollController.offset >= kToolbarHeight) {
+        setState(() {
+          appBarColor = Colors.transparent;
+        });
+      } else {
+        setState(() {
+          appBarColor = Colors.black;
+        });
+      }
+    });
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        // title: const Text('teste appbar', style: TextStyle(color: Colors.red),),
-        backgroundColor: Colors.black,
+        backgroundColor: appBarColor,
         elevation: 0,
         title: Row(
           children: [
@@ -24,15 +41,6 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        // leading: Container(
-
-        //   color: Colors.red,
-        //   width: double.infinity,
-        //   height: 0,
-        //   margin: const EdgeInsets.only(left: 10),
-        //   child: Image.network('https://i.ibb.co/gyDGZ7q/crunchyroll-logo.png', fit: BoxFit.contain,)
-
-        // ),
         actions: [
           IconButton(onPressed: () {
             
@@ -45,13 +53,15 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(Icons.search))
         ],
       ),
+      
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           SliverAppBar(
             leadingWidth: 150,
             expandedHeight: 500,
             floating: true,
-            pinned: false,
+            pinned: true,
             backgroundColor: Colors.black,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
