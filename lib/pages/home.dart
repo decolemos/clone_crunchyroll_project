@@ -61,8 +61,8 @@ class _HomePageState extends State<HomePage> {
             leadingWidth: 150,
             expandedHeight: 500,
             floating: true,
-            pinned: true,
-            backgroundColor: Colors.black,
+            pinned: false,
+            backgroundColor: appBarColor,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: const SizedBox(
